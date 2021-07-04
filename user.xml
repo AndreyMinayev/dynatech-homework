@@ -1,0 +1,50 @@
+<t:object xmlns:t="http://prism.evolveum.com/xml/ns/public/types-3"
+          xmlns="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+          xmlns:apti="http://midpoint.evolveum.com/xml/ns/public/common/api-types-3"
+          xmlns:c="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+          xmlns:icfs="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/resource-schema-3"
+          xmlns:org="http://midpoint.evolveum.com/xml/ns/public/common/org-3"
+          xmlns:q="http://prism.evolveum.com/xml/ns/public/query-3"
+          xmlns:ri="http://midpoint.evolveum.com/xml/ns/public/resource/instance-3"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="apti:ObjectListType">
+    <apti:object1 oid="deadbeef-c001-f00d-1111-222233330001" version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="c:UserType">
+        <name>jack</name>
+        <metadata>
+            <requestTimestamp>2021-07-02T07:48:19.642Z</requestTimestamp>
+            <requestorRef oid="00000000-0000-0000-0000-000000000002" relation="org:default" type="c:UserType"/>
+            <createTimestamp>2021-07-02T07:48:19.676Z</createTimestamp>
+            <creatorRef oid="00000000-0000-0000-0000-000000000002" relation="org:default" type="c:UserType"/>
+            <createChannel>http://midpoint.evolveum.com/xml/ns/public/common/channels-3#user</createChannel>
+        </metadata>
+        <operationExecution id="1">
+            <recordType>simple</recordType>
+            <timestamp>2021-07-02T07:48:19.716Z</timestamp>
+            <operation>
+                <objectDelta>
+                    <t:changeType>add</t:changeType>
+                    <t:objectType>c:UserType</t:objectType>
+                </objectDelta>
+                <executionResult>
+                    <operation>com.evolveum.midpoint.model.impl.lens.ChangeExecutor.executeDelta</operation>
+                    <status>success</status>
+                    <importance>normal</importance>
+                    <token>1000000000000001787</token>
+                </executionResult>
+                <objectName>jack</objectName>
+            </operation>
+            <status>success</status>
+            <initiatorRef oid="00000000-0000-0000-0000-000000000002" relation="org:default" type="c:UserType"/>
+            <channel>http://midpoint.evolveum.com/xml/ns/public/common/channels-3#user</channel>
+        </operationExecution>
+        <iteration>0</iteration>
+        <iterationToken/>
+        <activation>
+            <effectiveStatus>enabled</effectiveStatus>
+            <enableTimestamp>2021-07-02T07:48:19.645Z</enableTimestamp>
+        </activation>
+        <fullName>Cpt. Jack Sparrow</fullName>
+        <givenName>Jack</givenName>
+        <familyName>Sparrow</familyName>
+        <honorificPrefix>Cpt.</honorificPrefix>
+    </apti:object1>
+</t:object>

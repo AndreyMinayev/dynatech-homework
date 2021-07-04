@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://prism.evolveum.com/xml/ns/public/types-3" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="changeType" type="xs:string"/>
+  <xs:element name="objectType" type="xs:string"/>
+  <xs:element name="object" type="typ:objectType" xmlns:typ="http://prism.evolveum.com/xml/ns/public/types-3"/>
+  <xs:complexType name="objectType">
+    <xs:sequence>
+      <xs:element ref="api:object" xmlns:api="http://midpoint.evolveum.com/xml/ns/public/common/api-types-3"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
