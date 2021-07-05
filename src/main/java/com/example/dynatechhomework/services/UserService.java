@@ -34,17 +34,12 @@ public class UserService {
 
     public UserDTO getUserByName(String userName) {
 
-
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.getInterceptors().add(
-                new BasicAuthorizationInterceptor("administrator", "5ecr3t"));
+        // Preparing request
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Basic YWRtaW5pc3RyYXRvcjo1ZWNyM3Q=");
         headers.add("Accept", "application/xml");
 
         headers.setContentType(MediaType.APPLICATION_XML);
-
-
 
         String body ="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<q:query xmlns:q=\"http://prism.evolveum.com/xml/ns/public/query-3\"\n" +
@@ -60,8 +55,10 @@ public class UserService {
         HttpEntity<String> request = new HttpEntity<String>(body, headers);
 
 
-
-
+        //  Making request
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getInterceptors().add(
+                new BasicAuthorizationInterceptor("administrator", "5ecr3t"));
        ResponseEntity<String> response =
                 restTemplate.exchange(
                         "http://172.18.98.180:8080/midpoint/ws/rest/users/search",HttpMethod.POST, request,
@@ -70,6 +67,7 @@ public class UserService {
 
 
 
+       //  Unmarshaling the result to UserDTO
         try{
             JAXBContext context = JAXBContext.newInstance(QueryObject.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
