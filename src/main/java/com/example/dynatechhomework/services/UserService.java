@@ -54,7 +54,7 @@ public class UserService {
                 new BasicAuthorizationInterceptor("administrator", "5ecr3t"));
        ResponseEntity<String> response =
                 restTemplate.exchange(
-                        "http://172.18.98.180:8080/midpoint/ws/rest/users/search",HttpMethod.POST, request,
+                        "http://127.0.0.1:8088/midpoint/ws/rest/users/search",HttpMethod.POST, request,
                        String.class);
 
 

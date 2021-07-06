@@ -31,7 +31,7 @@ public class MainController {
 
         UserDTO userQuery = userService.getUserByName(userName);
         if(userQuery ==null){
-            return new ResponseEntity<>(new MessageResponse("No such user with that username"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new MessageResponse("User with that username, does not exist"), HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>(userQuery, HttpStatus.OK);
