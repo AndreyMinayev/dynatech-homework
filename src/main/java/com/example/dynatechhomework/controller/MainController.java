@@ -2,6 +2,8 @@ package com.example.dynatechhomework.controller;
 
 
 import com.example.dynatechhomework.dto.UserDTO;
+import com.example.dynatechhomework.dto.UserQuery;
+import com.example.dynatechhomework.response.MessageResponse;
 import com.example.dynatechhomework.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,11 +27,14 @@ public class MainController {
     }
 
     @GetMapping(value = "/{userName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserDTO getUserFromIDM(@PathVariable("userName") String userName){
+    public ResponseEntity<Object> getUserFromIDM(@PathVariable("userName") String userName){
 
-        UserDTO userDTO = userService.getUserByName(userName);
+        UserDTO userQuery = userService.getUserByName(userName);
+        if(userQuery ==null){
+            return new ResponseEntity<>(new MessageResponse("No such user with that username"), HttpStatus.NOT_FOUND);
+        }
 
-        return userDTO;
+        return new ResponseEntity<>(userQuery, HttpStatus.OK);
 
     }
 }

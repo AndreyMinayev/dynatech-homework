@@ -4,7 +4,7 @@ package com.example.dynatechhomework.services;
 import com.example.dynatechhomework.dto.QueryObject;
 
 import com.example.dynatechhomework.dto.UserDTO;
-import com.example.dynatechhomework.exception.UserNotFoundException;
+import com.example.dynatechhomework.dto.UserQuery;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.http.*;
@@ -12,20 +12,10 @@ import org.springframework.http.client.support.BasicAuthorizationInterceptor;
 import org.springframework.stereotype.Service;
 
 import org.springframework.web.client.RestTemplate;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
 import java.io.StringReader;
 
 
@@ -64,7 +54,7 @@ public class UserService {
                 new BasicAuthorizationInterceptor("administrator", "5ecr3t"));
        ResponseEntity<String> response =
                 restTemplate.exchange(
-                        "http://127.0.0.1:8088/midpoint/ws/rest/users/search",HttpMethod.POST, request,
+                        "http://172.18.98.180:8080/midpoint/ws/rest/users/search",HttpMethod.POST, request,
                        String.class);
 
 
@@ -75,11 +65,19 @@ public class UserService {
             JAXBContext context = JAXBContext.newInstance(QueryObject.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
             QueryObject unmarshaled = (QueryObject)unmarshaller.unmarshal(new StringReader(response.getBody()));
+            UserQuery userQuery = unmarshaled.getUserObject();
+            UserDTO userDTO = new UserDTO();
+            userDTO.setName(userQuery.getName());
+            userDTO.setGivenName(userQuery.getGivenName());
+            userDTO.setFamilyName(userQuery.getFamilyName());
+            userDTO.setFullName(userQuery.getFullName());
+            userDTO.setHonorificPrefix(userQuery.getHonorificPrefix());
+            userDTO.setEffectiveStatus(userQuery.getActivation().getEffectiveStatus());
 
-            return unmarshaled.getUserObject();
+            return userDTO;
         }catch (Exception e){
             log.error("There is no such user", e);
-            throw new UserNotFoundException("There is no Such user");
+            return null;
         }
 
 
