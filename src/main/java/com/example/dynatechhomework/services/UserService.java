@@ -5,6 +5,8 @@ import com.example.dynatechhomework.dto.QueryObject;
 
 import com.example.dynatechhomework.dto.UserDTO;
 import com.example.dynatechhomework.exception.UserNotFoundException;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.http.*;
 import org.springframework.http.client.support.BasicAuthorizationInterceptor;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,7 @@ import java.io.StringReader;
 
 
 @Service
+@Slf4j
 public class UserService {
 
 
@@ -61,7 +64,7 @@ public class UserService {
                 new BasicAuthorizationInterceptor("administrator", "5ecr3t"));
        ResponseEntity<String> response =
                 restTemplate.exchange(
-                        "http://172.18.98.180:8080/midpoint/ws/rest/users/search",HttpMethod.POST, request,
+                        "http://127.0.0.1:8088/midpoint/ws/rest/users/search",HttpMethod.POST, request,
                        String.class);
 
 
@@ -75,8 +78,8 @@ public class UserService {
 
             return unmarshaled.getUserObject();
         }catch (Exception e){
+            log.error("There is no such user", e);
             throw new UserNotFoundException("There is no Such user");
-
         }
 
 
